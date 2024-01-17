@@ -80,10 +80,10 @@
     
     
     /** AWS SNS Access Key ID */
-    $access_key_id    = 'AKIAZYI57YHAM5N5U3RW';
+    $access_key_id    = '';
     
     /** AWS SNS Secret Access Key */
-    $secret = '17pLuxjjgaGEhsZnbAYblC9aBFK9FU2f6Q1sMyT0';
+    $secret = '';
     
     /** Create SNS Client By Passing Credentials */
     $SnSclient = new SnsClient([
