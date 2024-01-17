@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MCEC Attendance System</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="http://code.img2imp.com/cdn/i2i_qrcode.min.js"></script> 
+    <style>
+        .makeSpace {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .download_btn{
+            margin-top: 15px;
+            margin-bottom: 10px;
+            width:100%; 
+        }
+		a{
+			color:white;
+		}
+    </style>
+</head>
+<div class="jumbotron text-center" style="background: none; background-image: url(mainbg.jpg);">
+        <div class="container">
+            <div class="row">
+               <div class="col-sm-5">
+                    <fieldset>
+                    
+                    <form name="frmContact" class="needs-validation " method="post" action="contact.php">
+                        <p>
+                        <label for="Name" style="color: white; font-weight: bolder;">Your Name </label>
+                        <input type="text" class="form-control" name="txtName" id="txtName" placeholder="ENTER Name" value="" required>
+                        <div class="invalid-feedback">
+                                    Valid first name is required.
+                                    </div>
+                        </p>
+                        <p>
+                        <label for="studentid" style="color: white; font-weight: bolder;">Your STUDENT ID</label>
+                        <input type="text"  class="form-control"  name="txtstudentid" id="txtstudentid" placeholder="ENTER STUDENTID" value="" required>
+                        </p>
+                        <p>
+                        <label for="ContactNumber" style="color: white; font-weight: bolder;">GUARDIAN CONTACT NUMBER</label>
+                        <input type="text"  class="form-control" name="txtContactNumber" id="txtContactNumber" placeholder="ENTER CONTACT NUMBER" value="" required>
+                        </p>
+                        <p>
+                        <label for="Section" style="color: white; font-weight: bolder;"> Your Section</label>
+                        <input type="text" class="form-control" name="txtSection" id="txtSection"  placeholder="Section" required></textarea>
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>
+                        <input type="submit" name="Submit" id="Submit" value="Click me to Contact"  class="btn btn-primary btn-lg btn-block">
+                        </p>
+                        <!-- Both Button on 3rd Row with 1-5-1 div  -->
+                                        <div class="row">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-5">
+                                                <button type="button" class="btn btn-primary makeSpace" style="width:100%" onclick="convertQR()">Convert</button>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <a href="../student/index.php" button type="button" class="btn btn-danger makeSpace" style="width:100%" onclick="clearInput()">Back</button></a>
+                                                
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="row" style="margin-left: auto; margin-right: auto;"> 
+                                            <div id="div_Id_of_qrcode"></div>
+                                        </div>
+                                        <div class="row" id="qrcode_download" style="margin-left: auto; margin-right: auto;"> </div>
+                                    </div> 
+                                </div>
+                            </div>
+                    </form>
+                    </fieldset>
+                    </div>
+
+
+ <script>
+        function download_qr_image() {
+            var myCanva = document.getElementById("div_Id_of_qrcode").childNodes[0];
+            var CanvasElement = document.createElement("CANVAS");
+            CanvasElement.id = "mycanvas";
+            CanvasElement.width = myCanva.width+30;
+            CanvasElement.height = myCanva.height+30;
+            CanvasElement.getContext("2d").fillStyle = "#ffffff";
+            CanvasElement.getContext("2d").rect(0, 0, myCanva.width+30, myCanva.height+30);
+            CanvasElement.getContext("2d").fill();
+            CanvasElement.getContext("2d").drawImage(myCanva,15,15);
+            myCanva = CanvasElement;
+            var qr_link = document.createElement('a');
+            qr_link.download = window.prompt("Enter File Name ");
+            qr_link.href = myCanva.toDataURL(); // for url toDataURL
+            qr_link.click();
+        }
+
+        function clearInput() {
+            document.getElementById("txtName").value = "";
+            document.getElementById("txtstudentid").value = "";
+            document.getElementById("txtContactNumber").value = "";
+            document.getElementById("txtSection").value = "";
+            document.getElementById("div_Id_of_qrcode").innerHTML = "";
+            if(document.getElementById("btn_download"))
+            {
+                document.getElementById("btn_download").remove();
+            }
+        }
+        function convertQR() {
+                document.getElementById("div_Id_of_qrcode").innerHTML = "";
+                if(document.getElementById("btn_download"))
+                {
+                    document.getElementById("btn_download").remove();
+                }
+                var inputStr = document.getElementById("txtName").value; 
+                var inputStr2 = document.getElementById("txtstudentid").value; 
+                var inputStr3 = document.getElementById("txtContactNumber").value; 
+                var inputStr4 = document.getElementById("txtSection").value; 
+                if(inputStr.length<1)
+                {
+                    alert("Please Enter Valid Input");
+                    return;
+                }
+               
+          
+                var qrcode = new QRCode("div_Id_of_qrcode", {   
+                    text: inputStr+" "+inputStr2+" "+inputStr3+" "+inputStr4,
+                    width: 300,
+                    height: 300,
+              
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
+               
+                var btnElement = document.createElement("BUTTON");
+                var textForBtn = document.createTextNode("Download QR Code");
+                btnElement.id = "btn_download";
+                btnElement.onclick = download_qr_image;
+                btnElement.classList.add("btn");
+                btnElement.classList.add("btn-success");
+                btnElement.classList.add("download_btn");
+                btnElement.appendChild(textForBtn);  
+                btnElement.style.width = 300;
+                document.getElementById("qrcode_download").appendChild(btnElement);
+        }
+    </script>
+</body>
+</html>

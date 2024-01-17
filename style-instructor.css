@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background: url(mainbg.jpg)no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.side-bar{
+    background: rgba(24, 94, 145, 0.521);
+    backdrop-filter: blur(15px);
+    width: 290px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    overflow-y: auto;
+    transition: 0.6s ease;
+    transition-property: left;
+}
+
+.side-bar.active{
+    left: 0;
+}
+
+.side-bar img{
+    margin-top: 15px;
+    margin-left: 100px;
+}
+
+h1 {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 5px;
+}
+
+.side-bar .menu{
+    width: 100%;
+    margin-top: 30px;
+}
+
+.side-bar .menu .item a{
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    padding: 5px 30px;
+    line-height: 60px;
+}
+
+.side-bar .menu .item a:hover{
+    color: rgb(24, 57, 88);
+    background: #9bc7ec;
+    transition: 0.3s ease;
+}
+
+.side-bar .menu .item i{
+    margin-right: 15px;
+}
+
+.close-btn{
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    right: 0;
+    margin: 25px;
+    cursor: pointer;
+}
+
+.menu-btn{
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    margin:25px;
+    cursor: pointer;
+}
+
+.card-body{
+    background: rgba(24, 94, 145, 0.521);
+    backdrop-filter: blur(15px);
+    width: 300px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
