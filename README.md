@@ -23,7 +23,8 @@ This system is create for attendance system of school. It a web with database wh
 #### Note: The AWS SMS service is availble at there website: https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html
 
 ***
-## Demo
+## Documentation 
+For user manual read this: Application Development QR Code and Sms notification for attendance Project Documentation.pdf
 
 
 
